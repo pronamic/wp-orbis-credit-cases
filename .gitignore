@@ -1,0 +1,6 @@
+# Composer and NPM
+/vendor/
+/node_modules/
+
+# Build
+/build/
