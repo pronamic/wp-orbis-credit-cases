@@ -19,6 +19,13 @@ GitHub URI: https://github.com/wp-orbis/wp-orbis-credit-cases
 */
 
 class OrbisCreditCasesPlugin {
+	/**
+	 * Plugin file.
+	 *
+	 * @var string
+	 */
+	public $file;
+
 	public function __construct( $file ) {
 		$this->file = $file;
 	}
