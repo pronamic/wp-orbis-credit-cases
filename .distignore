@@ -36,3 +36,5 @@ psalm.xml
 /deploy/
 /deploy.php
 /node_modules/
+
+/queries.sql
