@@ -1,0 +1,39 @@
+{
+	"name": "pronamic/wp-orbis-credit-cases",
+	"description": "Orbis Credit Cases plugin for WordPress.",
+	"license": "GPL-2.0-or-later",
+	"type": "wordpress-plugin",
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		},
+		"wp-slug": "orbis-credit-cases"
+	},
+	"require-dev": {
+		"pronamic/wp-coding-standards": "^2.1",
+		"wp-cli/dist-archive-command": "*",
+		"wp-cli/wp-cli-bundle": "*"
+	},
+	"scripts": {
+		"build": [
+			"rm -rf ./build/stage-1",
+			"rm -rf ./build/orbis-credit-cases",
+			"rsync --recursive --verbose --exclude-from=.distignore --exclude=/vendor/ ./ ./build/stage-1/",
+			"composer install --no-dev --prefer-dist --optimize-autoloader --working-dir=./build/stage-1/",
+			"rsync --recursive --verbose --exclude-from=.distignore ./build/stage-1/ ./build/orbis-credit-cases/",
+			"vendor/bin/wp i18n make-pot ./build/orbis-credit-cases/ --slug=orbis-credit-cases",
+			"vendor/bin/wp i18n make-mo ./build/orbis-credit-cases/languages/",
+			"vendor/bin/wp dist-archive ./build/orbis-credit-cases/ --plugin-dirname=orbis-credit-cases --force"
+		],
+		"dist-archive": "wp dist-archive . --plugin-dirname=orbis-credit-cases",
+		"make-pot": [
+			"@build",
+			"rsync --recursive --delete --verbose ./build/orbis-credit-cases/languages/ ./languages/",
+			"vendor/bin/wp i18n update-po ./languages/orbis-credit-cases.pot"
+		],
+		"phpcs": "vendor/bin/phpcs",
+		"qa": [
+			"@phpcs"
+		]
+	}
+}
