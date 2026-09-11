@@ -1,0 +1,3 @@
+ALTER TABLE orbis_credit_cases ADD FOREIGN KEY ( post_id ) REFERENCES wp_posts ( ID ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE orbis_credit_cases ADD FOREIGN KEY ( company_id ) REFERENCES orbis_companies ( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE orbis_credit_cases ADD FOREIGN KEY ( contact_id ) REFERENCES orbis_persons ( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
